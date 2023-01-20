@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: oc-demo-pvc-localstorage-rwo-dirk
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: oc-demo-pod-nginx-localstorage-rwo
+  labels: 
+    app : nginx
+spec:
+  volumes:
+    - name: my-demo-pod-localstorage-rwo
+      persistentVolumeClaim:
+        claimName: oc-demo-pvc-localstorage-rwo-dirk
+  containers:
+    - name: oc-demo-pod-nginx-container-rwo
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: my-demo-pod-localstorage-rwo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: oc-demo-service-nginx-localstorage-rwo
+spec:
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
