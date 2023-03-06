@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubi-pod
+  labels: 
+    app : ubi
+spec:
+  containers:
+    - name: ubi-container
+      image: registry.access.redhat.com/ubi8/ubi
+      ports:
+        - containerPort: 80
+          name: "http-server"
+        - containerPort: 443
+          name: "ssh"
