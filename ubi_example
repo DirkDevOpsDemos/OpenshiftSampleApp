@@ -4,11 +4,7 @@ metadata:
   name: ubi_pod
   labels: 
     app : ubi
-# spec:
-#  volumes:
-#    - name: my-pod-storage
-#      persistentVolumeClaim:
-#        claimName: vsphere-with-tanzu-pv-nfs-rwx
+spec:
   containers:
     - name: ubi_container
       image: registry.access.redhat.com/ubi8/ubi
