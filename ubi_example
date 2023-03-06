@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: ubi_pod
+  name: ubi-pod
   labels: 
     app : ubi
 spec:
   containers:
-    - name: ubi_container
+    - name: ubi-container
       image: registry.access.redhat.com/ubi8/ubi
       ports:
         - containerPort: 80
